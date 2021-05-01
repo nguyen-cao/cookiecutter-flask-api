@@ -43,10 +43,10 @@ class Model(CRUDMixin, db.Model):
 
 
 class PkModel(Model):
-    """Base model class that includes CRUD convenience methods, plus adds a 'primary key' column named ``id``."""
+    """Base model class that includes CRUD convenience methods, plus adds a 'primary key' column named ``pid``."""
 
     __abstract__ = True
-    id = Column(db.Integer, primary_key=True)
+    pid = Column(db.Integer, primary_key=True)
 
     @classmethod
     def get_by_id(cls, record_id):
@@ -62,7 +62,7 @@ class PkModel(Model):
 
 
 def reference_col(
-    tablename, nullable=False, pk_name="id", foreign_key_kwargs=None, column_kwargs=None
+    tablename, nullable=False, pk_name="pid", foreign_key_kwargs=None, column_kwargs=None
 ):
     """Column that adds primary key foreign key reference.
 

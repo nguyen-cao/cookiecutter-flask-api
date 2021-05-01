@@ -12,12 +12,6 @@ COOKIE = os.path.join(HERE, DEFAULT_APP_NAME)
 REQUIREMENTS = os.path.join(COOKIE, "requirements", "dev.txt")
 
 
-def _run_npm_command(ctx, command):
-    os.chdir(COOKIE)
-    ctx.run(f"npm {command}", echo=True)
-    os.chdir(HERE)
-
-
 def _run_flask_command(ctx, command, *args):
     os.chdir(COOKIE)
     flask_command = f"flask {command}"
@@ -35,7 +29,6 @@ def build(ctx):
 @task(pre=[build])
 def build_install(ctx):
     """Build the cookiecutter."""
-    _run_npm_command(ctx, "install")
     ctx.run(f"pip install -r {REQUIREMENTS} --ignore-installed", echo=True)
 
 
@@ -49,7 +42,6 @@ def clean(ctx):
 @task(pre=[clean, build_install])
 def lint(ctx):
     """Run lint commands."""
-    _run_npm_command(ctx, "run lint")
     os.chdir(COOKIE)
     os.environ["FLASK_ENV"] = "production"
     os.environ["FLASK_DEBUG"] = "0"

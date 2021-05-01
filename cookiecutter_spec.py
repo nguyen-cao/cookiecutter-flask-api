@@ -72,14 +72,8 @@ interactions = [
     columbo.Choice(
         "python_version",
         "Which version of Python will this application use?",
-        options=["3.8", "3.7", "3.6"],
-        default="3.8",
-    ),
-    columbo.Choice(
-        "node_version",
-        "Which version of Node will this application use?",
-        options=["14", "12"],
-        default="14",
+        options=["3.9", "3.8", "3.7", "3.6"],
+        default="3.9",
     ),
     columbo.Confirm(
         "use_heroku",
