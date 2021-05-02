@@ -1,6 +1,5 @@
 # ================================== BUILDER ===================================
 ARG INSTALL_PYTHON_VERSION=${INSTALL_PYTHON_VERSION:-PYTHON_VERSION_NOT_SET}
-ARG INSTALL_NODE_VERSION=${INSTALL_NODE_VERSION:-NODE_VERSION_NOT_SET}
 
 FROM python:${INSTALL_PYTHON_VERSION}-slim-buster AS builder
 
