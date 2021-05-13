@@ -9,7 +9,7 @@ x-default-volumes: &default_volumes
     - ./dev.db:/tmp/dev.db
 
 services:
-  flask-dev:
+  server-dev:
     build:
       context: .
       target: development
@@ -21,7 +21,7 @@ services:
       - "2992:2992"
     <<: *default_volumes
 
-  flask-prod:
+  server-prod:
     build:
       context: .
       target: production
@@ -37,7 +37,7 @@ services:
       GUNICORN_WORKERS: 4
     <<: *default_volumes
 
-  manage:
+  server-manage:
     build:
       context: .
       target: development
