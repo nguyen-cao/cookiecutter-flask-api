@@ -1,7 +1,7 @@
 # ================================== BUILDER ===================================
 ARG INSTALL_PYTHON_VERSION=${INSTALL_PYTHON_VERSION:-PYTHON_VERSION_NOT_SET}
 
-FROM python:${INSTALL_PYTHON_VERSION}-slim-buster AS builder
+FROM python:${INSTALL_PYTHON_VERSION} AS builder
 
 WORKDIR /app
 
@@ -19,7 +19,7 @@ COPY {{cookiecutter.app_name}} {{cookiecutter.app_name}}
 COPY .env.example .env
 
 # ================================= PRODUCTION =================================
-FROM python:${INSTALL_PYTHON_VERSION}-slim-buster as production
+FROM python:${INSTALL_PYTHON_VERSION} as production
 
 WORKDIR /app
 
@@ -27,8 +27,6 @@ RUN useradd -m sid
 RUN chown -R sid:sid /app
 USER sid
 ENV PATH="/home/sid/.local/bin:${PATH}"
-
-COPY --from=builder --chown=sid:sid /app/{{ cookiecutter.app_name }}/static /app/{{ cookiecutter.app_name }}/static
 
 {%- if cookiecutter.use_pipenv == "True" %}
 COPY ["Pipfile", "shell_scripts/auto_pipenv.sh", "./"]
